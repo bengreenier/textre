@@ -1,0 +1,18 @@
+{
+    "include": [
+        "./src/*"
+    ],
+    "compilerOptions": {
+        "strict": true,
+        "esModuleInterop": true,
+        "lib": [
+            "dom",
+            "es2018"
+        ],
+        "jsx": "react",
+        "typeRoots": [
+            "types",
+            "node_modules"
+        ]
+    }
+}
