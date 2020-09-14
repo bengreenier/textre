@@ -14,9 +14,9 @@ export default function App() {
   const [dataSources, setDataSources] = React.useState<DataSource[]>([]);
   const [regexes, setRegexes] = React.useState<RegexSource[]>([]);
 
-  const addSource = React.useCallback(
-    (name: string, data: string) => {
-      setDataSources(dataSources.concat({ name, data }));
+  const addSources = React.useCallback(
+    (srcs: { name: string; data: string }[]) => {
+      setDataSources(dataSources.concat(srcs));
     },
     [dataSources]
   );
@@ -33,7 +33,7 @@ export default function App() {
   } else if (addSourceVisible) {
     return (
       <AddSource
-        registerSource={addSource}
+        registerSources={addSources}
         onComplete={() => setAddSourceVisible(false)}
       />
     );

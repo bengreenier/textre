@@ -1,11 +1,12 @@
 import * as React from "react";
 
 interface Props {
-  registerSource: (name: string, data: string) => void;
+  registerSources: (srcs: { name: string; data: string }[]) => void;
   onComplete: () => void;
 }
 
 export default function AddSource(props: Props) {
+  const { registerSources, onComplete } = props;
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   const handleChange = React.useCallback(
@@ -20,32 +21,32 @@ export default function AddSource(props: Props) {
         return;
       }
 
-      const proms: Promise<void>[] = [];
+      const proms: Promise<{ name: string; data: string }>[] = [];
+
+      const loadSource = async (fl: File) => {
+        const data = await fl.text();
+        return { name: fl.name, data };
+      };
 
       for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-
-        proms.push(
-          file.text().then((data) => {
-            console.log(data.length);
-            props.registerSource(file.name, data);
-          })
-        );
+        proms.push(loadSource(files[i]));
       }
 
-      Promise.all(proms).then(() => {
+      Promise.all(proms).then((sources) => {
+        registerSources(sources);
+
         if (buttonRef.current) {
           buttonRef.current.disabled = false;
           buttonRef.current.style.backgroundColor = "";
         }
       });
     },
-    [props]
+    [registerSources]
   );
 
   const handleDone = React.useCallback(() => {
-    props.onComplete();
-  }, [props]);
+    onComplete();
+  }, [onComplete]);
 
   return (
     <div>

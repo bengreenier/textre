@@ -11,13 +11,12 @@ export interface RegexSource {
 
 // shorthand for knowing what these will get downcast to by chartjs
 
-type DateLike = string;
 type NumberLike = string;
 
 export type RegExpWithMarker = RegExp & { _marker: boolean };
 
 export interface RegexResult {
-  x: DateLike;
+  x: Date;
   y: NumberLike;
   marker?: boolean;
   meta?: string[];

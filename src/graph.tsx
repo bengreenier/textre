@@ -40,7 +40,7 @@ const colors = [
   "#f83500",
   "#8b723d",
   "#818b3d",
-  "#586215"
+  "#586215",
 ];
 
 export default function Graph(props: Props) {
@@ -109,7 +109,7 @@ export default function Graph(props: Props) {
               data:
                 split === ""
                   ? data
-                  : data.filter((d) => d && d.split && d.split === split)
+                  : data.filter((d) => d && d.split && d.split === split),
             };
           });
         });
@@ -127,10 +127,10 @@ export default function Graph(props: Props) {
             onInit: false,
             restoreOriginalData: false,
             enabled: true,
-            threshold: 500 // max number of points to display per dataset
+            threshold: 250, // max number of points to display per dataset
           },
           animation: {
-            duration: 0
+            duration: 0,
           },
           tooltips: {
             callbacks: {
@@ -151,8 +151,8 @@ export default function Graph(props: Props) {
 
                 label += Math.round(tooltipItem.yLabel * 100) / 100;
                 return label;
-              }
-            }
+              },
+            },
           },
           scales: {
             xAxes: [
@@ -163,27 +163,27 @@ export default function Graph(props: Props) {
                 ticks: {
                   major: {
                     enabled: true,
-                    fontStyle: "bold"
+                    fontStyle: "bold",
                   },
                   source: "data",
                   autoSkip: true,
                   autoSkipPadding: 75,
                   maxRotation: 0,
-                  sampleSize: 100
-                }
-              }
+                  sampleSize: 100,
+                },
+              },
             ],
             yAxes: [
               {
                 gridLines: {
-                  drawBorder: false
+                  drawBorder: false,
                 },
                 scaleLabel: {
-                  display: false
-                }
-              }
-            ]
-          }
+                  display: false,
+                },
+              },
+            ],
+          },
         }}
       />
     </div>

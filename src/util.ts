@@ -1,3 +1,4 @@
+import moment from "moment";
 import { RegexResult, RegExpWithMarker } from "./types";
 
 export const parseRegexResult = (
@@ -32,11 +33,11 @@ export const parseRegexResult = (
   }
 
   const res: RegexResult = {
-    x: time,
+    x: moment(time).toDate(),
     y: plot,
     split,
     marker: rex._marker || false,
-    meta: meta.length > 0 ? meta : undefined
+    meta: meta.length > 0 ? meta : undefined,
   };
 
   return res;
